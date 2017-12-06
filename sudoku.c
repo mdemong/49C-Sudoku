@@ -16,9 +16,6 @@ void shuffleColumns(int a[9][9]);
 void shuffleChunks(int a[9][9]);
 void swap(int a[][9], int i1, int j1, int i2, int j2);
 
-/*
- * 
- */
 int main(int argc, char** argv) {
     printf("Running Demo\n");
     printf("Generating Puzzle:\n");
@@ -50,21 +47,27 @@ void generatePuzzle(int a[9][9]){
         for(int j = 0; j < 9; j++)
             a[i][j] = b[i][j];
     }
+    shuffleRows(a);
 }
+
 /**
  * Helper function which shuffles rows of a 9x9 2D array.
  * @param a
  */
-void shuffleRows(int a[9][9]){
-    for(int i = 0; i < 20; i++){
-        //shuffling first 3 rows
-        int a = rand() % 3;
-        //shuffling second 3 rows
-
-        //shuffling last 3 rows
-
+void shuffleRows(int a[9][9])
+{
+    for (int i = 0; i < 10; i++) // 10 sets of swaps
+    {
+        for (int offset = 0; offset < 9; offset += 3)
+        {
+            int toprow = (rand() % 3) + offset;
+            int bottomrow = ((toprow + 1) % 3) + offset;
+            for (int col = 0; col < 9; col++)
+            {
+                swap(a, toprow, col, bottomrow, col);
+            }
+        }
     }
-    
 }
 
 void shuffleColumns(int a[9][9]){
