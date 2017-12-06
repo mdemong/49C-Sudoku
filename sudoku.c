@@ -47,7 +47,19 @@ void generatePuzzle(int a[9][9]){
         for(int j = 0; j < 9; j++)
             a[i][j] = b[i][j];
     }
+    
+    printPuzzle(a);
+    printf("\n");
     shuffleRows(a);
+    
+    printPuzzle(a);
+    printf("\n");
+    shuffleColumns(a);
+    
+    printPuzzle(a);
+    printf("\n");
+    shuffleChunks(a);
+    
 }
 
 /**
@@ -56,12 +68,15 @@ void generatePuzzle(int a[9][9]){
  */
 void shuffleRows(int a[9][9])
 {
-    for (int i = 0; i < 10; i++) // 10 sets of swaps
+    for (int i = 0; i < 5; i++) // 5 sets of swaps
     {
+        //For each chunk row. Top, Middle, Bottom.
+        //Top starts at 0, middle starts at 3, bottom starts at 6
         for (int offset = 0; offset < 9; offset += 3)
         {
             int toprow = (rand() % 3) + offset;
             int bottomrow = ((toprow + 1) % 3) + offset;
+            //Performing vertical swap at each column
             for (int col = 0; col < 9; col++)
             {
                 swap(a, toprow, col, bottomrow, col);
@@ -70,13 +85,23 @@ void shuffleRows(int a[9][9])
     }
 }
 
-void shuffleColumns(int a[9][9]){
-    //shuffling first 3 columns
-    
-    //shuffling second 3 columns
-    
-    //shuffling last 3 columns
-    
+void shuffleColumns(int a[9][9])
+{
+    for (int i = 0; i < 5; i++) // 5 sets of swaps
+    {
+        //For each chunk column. Left, Middle, Right
+        //Left starts at 0, middle starts at 3, right starts at 6
+        for (int offset = 0; offset < 9; offset += 3)
+        {
+            int leftcol = (rand() % 3) + offset;
+            int rightcol = ((leftcol + 1) % 3) + offset;
+            //Performing horizontal swap at each row
+            for (int row = 0; row < 9; row++)
+            {
+                swap(a, row, leftcol, row, rightcol);
+            }
+        }
+    }
 }
 
 void shuffleChunks(int a[9][9]){
