@@ -29,6 +29,10 @@ int main(int argc, char** argv) {
     printPuzzle(p);
 }
 
+/**
+ * Generates a Sudoku puzzle.
+ * @param a a 9x9 2D array, which will become a sudoku board.
+ */
 void generatePuzzle(int a[9][9]){
     int seed[9][9] = { 
 	{ 1, 2, 3, 4, 5, 6, 7, 8, 9 },
@@ -48,23 +52,21 @@ void generatePuzzle(int a[9][9]){
         for(int j = 0; j < 9; j++)
             a[i][j] = seed[i][j];
     }
+    // Shuffling
     for (int i = 0; i < 100; i++)
     {
         shuffleRows(a);
         shuffleColumns(a);
         shuffleChunks(a);
     }
-
     
-    printPuzzle(a);
-    printf("\n");
     zeroRandomVals(a,27);
     
 }
 
 /**
- * Helper function which shuffles rows of the puzzle.
- * @param a the array
+ * Shuffles rows of the puzzle.
+ * @param a the sudoku puzzle
  */
 void shuffleRows(int a[9][9])
 {
@@ -85,6 +87,10 @@ void shuffleRows(int a[9][9])
     }
 }
 
+/**
+ * Shuffles the columns of the puzzle.
+ * @param a the sudoku puzzle
+ */
 void shuffleColumns(int a[9][9])
 {
     for (int i = 0; i < 3; i++) // 3 sets of swaps
@@ -104,6 +110,10 @@ void shuffleColumns(int a[9][9])
     }
 }
 
+/**
+ * Shuffles the 3x3 chunks of the puzzle.
+ * @param a the puzzle
+ */
 void shuffleChunks(int a[9][9])
 {
     for (int i = 0; i < 10; i++)
@@ -125,6 +135,14 @@ void shuffleChunks(int a[9][9])
     }
 }
 
+/**
+ * Helper function which swaps two 3x3 chunks.
+ * @param a the Sudoku puzzle
+ * @param row1 the row of top left corner of chunk 1
+ * @param col1 the column of the top left corner of chunk 1
+ * @param row2 the row of the top left corner of chunk 2
+ * @param col2 the column of the top left corner of chunk 2
+ */
 void swapChunks(int a[][9], int row1, int col1, int row2, int col2)
 {
     for (int i = 0; i < 3; i++)
@@ -150,6 +168,11 @@ void swap(int a[9][9], int i1, int j1, int i2, int j2){
     a[i2][j2] = temp;
 }
 
+/**
+ * Changes the specified number of random elements to zeros.
+ * @param a the 9x9 Sudoku board
+ * @param n the number of elements to zero
+ */
 void zeroRandomVals(int a[9][9], int n){
     int i = 0;
     while (i < n && i < 81)
@@ -242,6 +265,10 @@ int checkMatches(int grid[][9], int row, int col, int x)
 	return 1;
 }
 
+/**
+ * Prints out the puzzle.
+ * @param a the Sudoku puzzle
+ */
 void printPuzzle(const int a[9][9]){
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
