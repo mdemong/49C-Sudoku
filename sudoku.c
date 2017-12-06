@@ -16,6 +16,7 @@ void shuffleColumns(int a[9][9]);
 void shuffleChunks(int a[9][9]);
 void swap(int a[][9], int i1, int j1, int i2, int j2);
 void swapChunks(int a[9][9], int row1, int col1, int row2, int col2);
+void zeroRandomVals(int a[9][9], int n);
 
 int main(int argc, char** argv) {
     printf("Running Demo\n");
@@ -31,15 +32,15 @@ int main(int argc, char** argv) {
 void generatePuzzle(int a[9][9]){
     //TODO: Replace this with actual generation, lol.
     int b[9][9] = { 
-	{ 3, 0, 6, 5, 0, 8, 4, 0, 0 },
-	{ 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-	{ 0, 8, 7, 0, 0, 0, 0, 3, 1 },
-	{ 0, 0, 3, 0, 1, 0, 0, 8, 0 },
-	{ 9, 0, 0, 8, 6, 3, 0, 0, 5 },
-	{ 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-	{ 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-	{ 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-	{ 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+	{ 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+	{ 7, 8, 9, 1, 2, 3, 4, 5, 6 },
+	{ 4, 5, 6, 7, 8, 9, 1, 2, 3 },
+	{ 9, 1, 2, 3, 4, 5, 6, 7, 8 },
+	{ 3, 4, 5, 6, 7, 8, 9, 1, 2 },
+	{ 6, 7, 8, 9, 1, 2, 3, 4, 5 },
+	{ 8, 9, 1, 2, 3, 4, 5, 6, 7 },
+	{ 2, 3, 4, 5, 6, 7, 8, 9, 1 },
+	{ 5, 6, 7, 8, 9, 1, 2, 3, 4 } };
     
     //replacing elements of a with elements of b
     //interestingly, doing a = { . . . } does not work here.
@@ -49,20 +50,18 @@ void generatePuzzle(int a[9][9]){
             a[i][j] = b[i][j];
     }
     
-    printPuzzle(a);
-    printf("\n");
-    shuffleRows(a);
-    
-    printPuzzle(a);
-    printf("\n");
+//    printPuzzle(a);
+//    printf("\n");
+    shuffleRows(a); 
+//    printPuzzle(a);
+//    printf("\n");
     shuffleColumns(a);
-    
-    printPuzzle(a);
-    printf("\n");
+//    printPuzzle(a);
+//    printf("\n");
     shuffleChunks(a);
-    
-    printPuzzle(a);
-    printf("\n");
+//    printPuzzle(a);
+//    printf("\n");
+    zeroRandomVals(a,27);
     
 }
 
@@ -110,7 +109,7 @@ void shuffleColumns(int a[9][9])
 
 void shuffleChunks(int a[9][9])
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
         // Swapping random chunk rows
         int toprow = 3 * (rand() % 3);
@@ -152,6 +151,20 @@ void swap(int a[9][9], int i1, int j1, int i2, int j2){
     int temp = a[i1][j1];
     a[i1][j1] = a[i2][j2];
     a[i2][j2] = temp;
+}
+
+void zeroRandomVals(int a[9][9], int n){
+    int i = 0;
+    while (i < n && i < 81)
+    {
+        int row = rand() % 9;
+        int col = rand() % 9;
+        if(a[row][col] != 0){
+            i++;
+            a[row][col] = 0;
+        }
+    }
+
 }
 
 //Recursive solver function
