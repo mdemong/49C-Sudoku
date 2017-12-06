@@ -15,6 +15,7 @@ void shuffleRows(int a[9][9]);
 void shuffleColumns(int a[9][9]);
 void shuffleChunks(int a[9][9]);
 void swap(int a[][9], int i1, int j1, int i2, int j2);
+void swapChunks(int a[9][9], int row1, int col1, int row2, int col2);
 
 int main(int argc, char** argv) {
     printf("Running Demo\n");
@@ -60,6 +61,9 @@ void generatePuzzle(int a[9][9]){
     printf("\n");
     shuffleChunks(a);
     
+    printPuzzle(a);
+    printf("\n");
+    
 }
 
 /**
@@ -70,7 +74,7 @@ void shuffleRows(int a[9][9])
 {
     for (int i = 0; i < 5; i++) // 5 sets of swaps
     {
-        //For each chunk row. Top, Middle, Bottom.
+        //Within each chunk row. Top, Middle, Bottom.
         //Top starts at 0, middle starts at 3, bottom starts at 6
         for (int offset = 0; offset < 9; offset += 3)
         {
@@ -89,7 +93,7 @@ void shuffleColumns(int a[9][9])
 {
     for (int i = 0; i < 5; i++) // 5 sets of swaps
     {
-        //For each chunk column. Left, Middle, Right
+        //Within each chunk column. Left, Middle, Right
         //Left starts at 0, middle starts at 3, right starts at 6
         for (int offset = 0; offset < 9; offset += 3)
         {
@@ -104,10 +108,36 @@ void shuffleColumns(int a[9][9])
     }
 }
 
-void shuffleChunks(int a[9][9]){
-    //shuffling rows
-    
-    //shuffling columns
+void shuffleChunks(int a[9][9])
+{
+    for (int i = 0; i < 5; i++)
+    {
+        // Swapping random chunk rows
+        int toprow = 3 * (rand() % 3);
+        int bottomrow = ((toprow + 3) % 9);
+        for(int i = 0; i <= 6; i += 3)
+        {
+            swapChunks(a, toprow, i, bottomrow, i);
+        }
+        // Swapping random chunk columns
+        int topcol = 3 * (rand() % 3);
+        int bottomcol = ((topcol + 3) % 9);
+        for(int i = 0; i <= 6; i += 3)
+        {
+            swapChunks(a, i, topcol, i, bottomcol);
+        }
+    }
+}
+
+void swapChunks(int a[][9], int row1, int col1, int row2, int col2)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            swap(a, row1 + i, col1 + j, row2 + i, col2 + j);
+        }
+    }
 }
 
 /**
