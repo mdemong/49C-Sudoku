@@ -30,8 +30,7 @@ int main(int argc, char** argv) {
 }
 
 void generatePuzzle(int a[9][9]){
-    //TODO: Replace this with actual generation, lol.
-    int b[9][9] = { 
+    int seed[9][9] = { 
 	{ 1, 2, 3, 4, 5, 6, 7, 8, 9 },
 	{ 7, 8, 9, 1, 2, 3, 4, 5, 6 },
 	{ 4, 5, 6, 7, 8, 9, 1, 2, 3 },
@@ -43,35 +42,33 @@ void generatePuzzle(int a[9][9]){
 	{ 5, 6, 7, 8, 9, 1, 2, 3, 4 } };
     
     //replacing elements of a with elements of b
-    //interestingly, doing a = { . . . } does not work here.
+    //doing a = { . . . } does not work here.
     //elements must be transferred manually.
     for(int i = 0; i < 9; i++){
         for(int j = 0; j < 9; j++)
-            a[i][j] = b[i][j];
+            a[i][j] = seed[i][j];
     }
+    for (int i = 0; i < 100; i++)
+    {
+        shuffleRows(a);
+        shuffleColumns(a);
+        shuffleChunks(a);
+    }
+
     
-//    printPuzzle(a);
-//    printf("\n");
-    shuffleRows(a); 
-//    printPuzzle(a);
-//    printf("\n");
-    shuffleColumns(a);
-//    printPuzzle(a);
-//    printf("\n");
-    shuffleChunks(a);
-//    printPuzzle(a);
-//    printf("\n");
+    printPuzzle(a);
+    printf("\n");
     zeroRandomVals(a,27);
     
 }
 
 /**
- * Helper function which shuffles rows of a 9x9 2D array.
- * @param a
+ * Helper function which shuffles rows of the puzzle.
+ * @param a the array
  */
 void shuffleRows(int a[9][9])
 {
-    for (int i = 0; i < 5; i++) // 5 sets of swaps
+    for (int i = 0; i < 3; i++) // 3 sets of swaps
     {
         //Within each chunk row. Top, Middle, Bottom.
         //Top starts at 0, middle starts at 3, bottom starts at 6
@@ -90,7 +87,7 @@ void shuffleRows(int a[9][9])
 
 void shuffleColumns(int a[9][9])
 {
-    for (int i = 0; i < 5; i++) // 5 sets of swaps
+    for (int i = 0; i < 3; i++) // 3 sets of swaps
     {
         //Within each chunk column. Left, Middle, Right
         //Left starts at 0, middle starts at 3, right starts at 6
