@@ -1,11 +1,12 @@
 
 /* 
- * File:   sudoku.c
- * Authors: mdemong, gareiner
+ * File:   Sudoku.c
+ * Authors: Micah Demong, Geordi Reiner
  */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int checkMatches(int grid[][9], int row, int col, int x);
 int solveSudoku(int grid[][9], int row, int col);
@@ -34,6 +35,8 @@ int main(int argc, char** argv) {
  * @param a a 9x9 2D array, which will become a sudoku board.
  */
 void generatePuzzle(int a[9][9]){
+    // Seeding Random Number from time
+    srand ( time(NULL) );
     int seed[9][9] = { 
 	{ 1, 2, 3, 4, 5, 6, 7, 8, 9 },
 	{ 7, 8, 9, 1, 2, 3, 4, 5, 6 },
@@ -52,8 +55,9 @@ void generatePuzzle(int a[9][9]){
         for(int j = 0; j < 9; j++)
             a[i][j] = seed[i][j];
     }
+    
     // Shuffling
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10000; i++)
     {
         shuffleRows(a);
         shuffleColumns(a);
