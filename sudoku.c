@@ -57,14 +57,14 @@ void generatePuzzle(int a[9][9]){
     }
     
     // Shuffling
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < 1000; i++)
     {
         shuffleRows(a);
         shuffleColumns(a);
         shuffleChunks(a);
     }
     
-    zeroRandomVals(a,27);
+    zeroRandomVals(a,36);
     
 }
 
