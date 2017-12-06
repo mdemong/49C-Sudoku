@@ -47,31 +47,6 @@ void generatePuzzle(int a[9][9]){
     }
 }
 
-
-//Helper function to check if rows, columns, and 3x3 sub-grids have matches
-int checkMatches(int grid[][9], int row, int col, int x)
-{
-	//Generate row portion of 3x3 sub-grid
-	int rowSubGrid = (row / 3) * 3;
-	//Generate column portion of 3x3 sub-grid
-	int colSubGrid = (col / 3) * 3;
-	for (int i = 0; i < 9; i++) {
-		//If row has match, return false
-		if (grid[row][i] == x) {
-			return 0;
-		}
-		//If column has match, return false
-		if (grid[i][col] == x) { 
-			return 0; 
-		}
-		//If 3x3 sub-grid has match, return false
-		if (grid[rowSubGrid + (i % 3)][colSubGrid + (i / 3)] == x) {
-			return 0;
-		}
-	}
-	return 1;
-}
-
 //Recursive solver function
 int solveSudoku(int grid[][9], int row, int col)
 {
@@ -124,6 +99,30 @@ int solveSudoku(int grid[][9], int row, int col)
 	else {
 		return 1;
 	}
+}
+
+//Helper function to check if rows, columns, and 3x3 sub-grids have matches
+int checkMatches(int grid[][9], int row, int col, int x)
+{
+	//Generate row portion of 3x3 sub-grid
+	int rowSubGrid = (row / 3) * 3;
+	//Generate column portion of 3x3 sub-grid
+	int colSubGrid = (col / 3) * 3;
+	for (int i = 0; i < 9; i++) {
+		//If row has match, return false
+		if (grid[row][i] == x) {
+			return 0;
+		}
+		//If column has match, return false
+		if (grid[i][col] == x) { 
+			return 0; 
+		}
+		//If 3x3 sub-grid has match, return false
+		if (grid[rowSubGrid + (i % 3)][colSubGrid + (i / 3)] == x) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 void printPuzzle(const int a[9][9]){
