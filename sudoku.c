@@ -5,13 +5,22 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
+
+void generatePuzzle(int a[9][9]);
+void solvePuzzle(int a[9][9]);
+void printPuzzle(const int a[9][9]);
 
 /*
  * 
  */
 int main(int argc, char** argv) {
-    printf("Hello World! :D");
-    return (EXIT_SUCCESS);
+    printf("Running Demo\n");
+    printf("Generating Puzzle:\n");
+    int p[9][9];
+    generatePuzzle(p);
+    printPuzzle(p);
+    printf("Solving Puzzle:\n");
+    solvePuzzle(p);
+    printPuzzle(p);
 }
 
