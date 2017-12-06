@@ -24,3 +24,15 @@ int main(int argc, char** argv) {
     printPuzzle(p);
 }
 
+void generatePuzzle(int a[9][9]){
+    
+}
+
+void solvePuzzle(int a[9][9]){
+    
+}
+
+void printPuzzle(const int a[9][9]){
+    
+}
+
