@@ -5,11 +5,16 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int checkMatches(int grid[][9], int row, int col, int x);
 int solveSudoku(int grid[][9], int row, int col);
 void generatePuzzle(int a[9][9]);
 void printPuzzle(const int a[9][9]);
+void shuffleRows(int a[9][9]);
+void shuffleColumns(int a[9][9]);
+void shuffleChunks(int a[9][9]);
+void swap(int a[][9], int i1, int j1, int i2, int j2);
 
 /*
  * 
@@ -45,6 +50,50 @@ void generatePuzzle(int a[9][9]){
         for(int j = 0; j < 9; j++)
             a[i][j] = b[i][j];
     }
+}
+/**
+ * Helper function which shuffles rows of a 9x9 2D array.
+ * @param a
+ */
+void shuffleRows(int a[9][9]){
+    for(int i = 0; i < 20; i++){
+        //shuffling first 3 rows
+        int a = rand() % 3;
+        //shuffling second 3 rows
+
+        //shuffling last 3 rows
+
+    }
+    
+}
+
+void shuffleColumns(int a[9][9]){
+    //shuffling first 3 columns
+    
+    //shuffling second 3 columns
+    
+    //shuffling last 3 columns
+    
+}
+
+void shuffleChunks(int a[9][9]){
+    //shuffling rows
+    
+    //shuffling columns
+}
+
+/**
+ * Helper function to swap two values of the sudoku board.
+ * @param a the array to swap values in
+ * @param i1 the row of value 1
+ * @param j1 the column of value 1
+ * @param i2 the row of value 2
+ * @param j2 the column of value 2
+ */
+void swap(int a[9][9], int i1, int j1, int i2, int j2){
+    int temp = a[i1][j1];
+    a[i1][j1] = a[i2][j2];
+    a[i2][j2] = temp;
 }
 
 //Recursive solver function
